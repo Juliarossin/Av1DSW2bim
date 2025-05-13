@@ -1,17 +1,15 @@
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import Home from "../pages/Home";
-import Atividades from "../pages/Atividades";
+import Atividades from "../pages/Detalhes";
+import Detalhes from "../pages/Detalhes";
 
 export default function AppRoutes() {
   return (
     <>
       <BrowserRouter>
-        <Link to="/">Home</Link>
-        <Link to="/Atividades">Atividades</Link>
-
         <Routes>
-          <Route path="/home" element={<Home />} />
-          <Route path="/Atividades" element={<Atividades />} /> 
+          <Route path="/" element={<Home />} />
+          <Route path="/detalhes/:nome" element={<Detalhes />} /> 
         </Routes>
       </BrowserRouter>
     </>

@@ -3,23 +3,23 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Home() {
-  const [posts, setPosts] = useState([]);
+  const [paises, setPaises] = useState([]);
 
   useEffect(() => {
     axios
-      .get("https://jsonplaceholder.typicode.com/posts?_limit=10")
-      .then((res) => setPosts(res.data));
+      .get("https://restcountries.com/v3.1/all")
+      .then((res) => setPaises(res.data));
   }, []);
 
-  console.log(posts);
+  console.log(paises);
   return (
     <>
       <div>
         <h2>Lista de Posts</h2>
         <ul>
-          {posts.map((post) => (
-            <li key={post.id}>
-              <Link to={`/detalhes/${post.id}`}>{post.title}</Link>
+          {paises.map((pais) => (
+            <li key={pais.cca3}>
+              <Link to={`/detalhes/${pais.name.common}`}>{pais.name.common}</Link>
             </li>
           ))}
         </ul>

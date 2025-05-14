@@ -11,11 +11,11 @@ export default function Home() {
       .then((res) => setPaises(res.data));
   }, []);
 
-  console.log(paises);
+  // console.log(paises);
   return (
     <>
       <div>
-        <h2>Lista de Posts</h2>
+        <h1>Lista de Países</h1>
         <ul>
           {paises.map((pais) => (
             <li key={pais.cca3}>

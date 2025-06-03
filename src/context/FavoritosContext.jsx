@@ -2,24 +2,27 @@ import { createContext, useContext, useState } from "react";
 
 const FavoritosContext = createContext();
 
-export function FavoritosProvider({ children }) {
+export default function FavoritosProvider({ children }) {
   const [favoritos, setFavoritos] = useState([]);
 
-  function adicionarOuRemoverFavorito(item) {
-    const existe = favoritos.find(f => f.key === item.key);
-    if (existe) {
-      setFavoritos(favoritos.filter(f => f.key !== item.key));
-    } else {
-      setFavoritos([...favoritos, item]);
-    }
-  }
+  const adicionarFavorito = (pais) => {
+    setFavoritos((prev) => [...prev, pais]);
+  };
+
+  const removerFavorito = (pais) => {
+    setFavoritos((prev) => prev.filter((item) => item !== pais));
+  };
+
+  const estaFavoritado = (pais) => favoritos.includes(pais);
+
 
   return (
-    <FavoritosContext.Provider value={{ favoritos, adicionarOuRemoverFavorito }}>
+    <FavoritosContext.Provider value={{ favoritos, adicionarFavorito, removerFavorito, estaFavoritado }}>
       {children}
     </FavoritosContext.Provider>
   );
 }
+
 
 export function useFavoritos() {
   return useContext(FavoritosContext);

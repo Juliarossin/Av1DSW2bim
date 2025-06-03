@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App.jsx';
-import './index.css';
-import { FavoritosProvider } from './context/FavoritosContext.jsx'; // ⬅️ Importa o provider
+import App from './App';
+import FavoritosProvider from './context/FavoritosContext';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <FavoritosProvider> {/* ⬅️ Envolve seu App com o provider */}
+    <FavoritosProvider>
       <App />
     </FavoritosProvider>
   </React.StrictMode>

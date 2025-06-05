@@ -7,14 +7,14 @@ export default function Home() {
   const [paises, setPaises] = useState([]);
   const { adicionarFavorito, removerFavorito, estaFavoritado } = useFavoritos();
 
-useEffect(() => {
-  axios
-    .get("https://restcountries.com/v3.1/all?fields=name,cca3")
-    .then((res) => setPaises(res.data))
-    .catch((err) => {
-      console.error("Erro ao buscar países:", err);
-    });
-}, []);
+  useEffect(() => {
+    axios
+      .get("https://restcountries.com/v3.1/all?fields=name,cca3")
+      .then((res) => setPaises(res.data))
+      .catch((err) => {
+        console.error("Erro ao buscar países:", err);
+      });
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 flex flex-col items-center py-10 px-4">
@@ -22,7 +22,6 @@ useEffect(() => {
         Lista de Países
       </h1>
 
-      {/* Link para a página de favoritos */}
       <Link
         to="/favoritos"
         className="text-blue-600 hover:text-blue-800 font-medium underline mb-6"
@@ -47,7 +46,7 @@ useEffect(() => {
                 </Link>
                 <button
                   onClick={(e) => {
-                    e.preventDefault(); // impede de abrir o link
+                    e.preventDefault();
                     estaFavoritado(nome)
                       ? removerFavorito(nome)
                       : adicionarFavorito(nome);

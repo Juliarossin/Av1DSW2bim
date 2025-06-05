@@ -7,17 +7,29 @@ export default function Home() {
   const [paises, setPaises] = useState([]);
   const { adicionarFavorito, removerFavorito, estaFavoritado } = useFavoritos();
 
-  useEffect(() => {
-    axios
-      .get("https://restcountries.com/v3.1/all")
-      .then((res) => setPaises(res.data));
-  }, []);
+useEffect(() => {
+  axios
+    .get("https://restcountries.com/v3.1/all?fields=name,cca3")
+    .then((res) => setPaises(res.data))
+    .catch((err) => {
+      console.error("Erro ao buscar países:", err);
+    });
+}, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 flex flex-col items-center py-10 px-4">
-      <h1 className="text-4xl font-bold text-gray-800 mb-8 text-center">
+      <h1 className="text-4xl font-bold text-gray-800 mb-4 text-center">
         Lista de Países
       </h1>
+
+      {/* Link para a página de favoritos */}
+      <Link
+        to="/favoritos"
+        className="text-blue-600 hover:text-blue-800 font-medium underline mb-6"
+      >
+        Ver países favoritos ❤️
+      </Link>
+
       <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full max-w-6xl">
         {paises.map((pais) => {
           const nome = pais.name.common;
